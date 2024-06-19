@@ -14,11 +14,13 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust the width as needed */
 }
 
 #flag-container {
     font-size: 100px;
     margin-bottom: 20px;
+    width: 100%; /* Make sure the flag container takes up the full width of the quiz container */
 }
 
 #streak-container {
@@ -46,7 +48,7 @@ body {
 #result {
     margin-top: 20px;
     font-size: 18px;
-    height: 24px; /* Adjust height based on your desired font size */
+    height: 48px; /* Adjust height to be big enough for two lines */
     line-height: 24px; /* Ensure the text is vertically centered */
 }
 
