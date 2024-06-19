@@ -16,8 +16,12 @@ function loadFlag() {
     
     const options = generateOptions(flagData.name);
     for (let i = 0; i < options.length; i++) {
-        document.getElementById(`option${i + 1}`).innerText = options[i];
+        const optionBtn = document.getElementById(`option${i + 1}`);
+        optionBtn.innerText = options[i];
+        optionBtn.classList.remove('correct', 'incorrect');
+        optionBtn.disabled = false;
     }
+    document.getElementById('result').innerText = '';
 }
 
 function generateOptions(correctAnswer) {
@@ -33,17 +37,31 @@ function generateOptions(correctAnswer) {
 }
 
 function checkAnswer(optionId) {
-    const selectedOption = document.getElementById(optionId).innerText;
+    const selectedOption = document.getElementById(optionId);
     const correctAnswer = countries[currentFlagIndex].name;
 
-    if (selectedOption === correctAnswer) {
+    if (selectedOption.innerText === correctAnswer) {
+        selectedOption.classList.add('correct');
         document.getElementById('result').innerText = 'Correct!';
     } else {
+        selectedOption.classList.add('incorrect');
         document.getElementById('result').innerText = `Wrong! The correct answer is ${correctAnswer}`;
+        // Highlight the correct answer
+        for (let i = 1; i <= 4; i++) {
+            const optionBtn = document.getElementById(`option${i}`);
+            if (optionBtn.innerText === correctAnswer) {
+                optionBtn.classList.add('correct');
+                break;
+            }
+        }
+    }
+
+    // Disable all buttons after an answer is selected
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById(`option${i}`).disabled = true;
     }
 
     setTimeout(() => {
-        document.getElementById('result').innerText = '';
         loadFlag();
     }, 2000);
 }

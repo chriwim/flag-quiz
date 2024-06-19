@@ -42,3 +42,13 @@ body {
     margin-top: 20px;
     font-size: 18px;
 }
+
+.correct {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.incorrect {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
