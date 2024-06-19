@@ -21,6 +21,11 @@ body {
     margin-bottom: 20px;
 }
 
+#streak-container {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
 .option-btn {
     display: block;
     width: 100%;

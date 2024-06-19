@@ -1,5 +1,6 @@
 let countries = [];
 let currentFlagIndex = 0;
+let streak = 0;
 
 fetch('countries.json')
     .then(response => response.json())
@@ -43,6 +44,7 @@ function checkAnswer(optionId) {
     if (selectedOption.innerText === correctAnswer) {
         selectedOption.classList.add('correct');
         document.getElementById('result').innerText = 'Correct!';
+        streak++;
     } else {
         selectedOption.classList.add('incorrect');
         document.getElementById('result').innerText = `Wrong! The correct answer is ${correctAnswer}`;
@@ -54,7 +56,11 @@ function checkAnswer(optionId) {
                 break;
             }
         }
+        streak = 0; // Reset streak
     }
+
+    // Update streak display
+    document.getElementById('streak').innerText = streak;
 
     // Disable all buttons after an answer is selected
     for (let i = 1; i <= 4; i++) {
