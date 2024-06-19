@@ -46,6 +46,8 @@ body {
 #result {
     margin-top: 20px;
     font-size: 18px;
+    height: 24px; /* Adjust height based on your desired font size */
+    line-height: 24px; /* Ensure the text is vertically centered */
 }
 
 .correct {
