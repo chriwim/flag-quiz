@@ -1,32 +1,13 @@
-const countries = [
-    { name: "Afghanistan", flag: "🇦🇫" },
-    { name: "Albania", flag: "🇦🇱" },
-    { name: "Algeria", flag: "🇩🇿" },
-    { name: "Andorra", flag: "🇦🇩" },
-    { name: "Angola", flag: "🇦🇴" },
-    { name: "Antigua and Barbuda", flag: "🇦🇬" },
-    { name: "Argentina", flag: "🇦🇷" },
-    { name: "Armenia", flag: "🇦🇲" },
-    { name: "Australia", flag: "🇦🇺" },
-    { name: "Austria", flag: "🇦🇹" },
-    { name: "Azerbaijan", flag: "🇦🇿" },
-    // Add more countries as needed
-    { name: "United States", flag: "🇺🇸" },
-    { name: "Canada", flag: "🇨🇦" },
-    { name: "United Kingdom", flag: "🇬🇧" },
-    { name: "France", flag: "🇫🇷" },
-    { name: "Germany", flag: "🇩🇪" },
-    { name: "Japan", flag: "🇯🇵" },
-    { name: "China", flag: "🇨🇳" },
-    { name: "India", flag: "🇮🇳" },
-    // Add more countries as needed
-];
-
+let countries = [];
 let currentFlagIndex = 0;
 
-window.onload = function() {
-    loadFlag();
-};
+fetch('countries.json')
+    .then(response => response.json())
+    .then(data => {
+        countries = data;
+        loadFlag();
+    })
+    .catch(error => console.error('Error loading countries:', error));
 
 function loadFlag() {
     currentFlagIndex = Math.floor(Math.random() * countries.length);
