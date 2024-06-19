@@ -1,25 +1,25 @@
-const flags = [
-    {
-        symbol: '🇺🇸', // USA
-        correct: 'United States',
-        options: ['United States', 'Canada', 'United Kingdom', 'Australia']
-    },
-    {
-        symbol: '🇨🇦', // Canada
-        correct: 'Canada',
-        options: ['Canada', 'United States', 'United Kingdom', 'Australia']
-    },
-    {
-        symbol: '🇬🇧', // United Kingdom
-        correct: 'United Kingdom',
-        options: ['United Kingdom', 'United States', 'Canada', 'Australia']
-    },
-    {
-        symbol: '🇦🇺', // Australia
-        correct: 'Australia',
-        options: ['Australia', 'United States', 'Canada', 'United Kingdom']
-    },
-    // Add more flag objects here
+const countries = [
+    { name: "Afghanistan", flag: "🇦🇫" },
+    { name: "Albania", flag: "🇦🇱" },
+    { name: "Algeria", flag: "🇩🇿" },
+    { name: "Andorra", flag: "🇦🇩" },
+    { name: "Angola", flag: "🇦🇴" },
+    { name: "Antigua and Barbuda", flag: "🇦🇬" },
+    { name: "Argentina", flag: "🇦🇷" },
+    { name: "Armenia", flag: "🇦🇲" },
+    { name: "Australia", flag: "🇦🇺" },
+    { name: "Austria", flag: "🇦🇹" },
+    { name: "Azerbaijan", flag: "🇦🇿" },
+    // Add more countries as needed
+    { name: "United States", flag: "🇺🇸" },
+    { name: "Canada", flag: "🇨🇦" },
+    { name: "United Kingdom", flag: "🇬🇧" },
+    { name: "France", flag: "🇫🇷" },
+    { name: "Germany", flag: "🇩🇪" },
+    { name: "Japan", flag: "🇯🇵" },
+    { name: "China", flag: "🇨🇳" },
+    { name: "India", flag: "🇮🇳" },
+    // Add more countries as needed
 ];
 
 let currentFlagIndex = 0;
@@ -29,26 +29,38 @@ window.onload = function() {
 };
 
 function loadFlag() {
-    const flagData = flags[currentFlagIndex];
-    document.getElementById('flag').innerText = flagData.symbol;
-    shuffleArray(flagData.options);
-
-    for (let i = 0; i < flagData.options.length; i++) {
-        document.getElementById(`option${i + 1}`).innerText = flagData.options[i];
+    currentFlagIndex = Math.floor(Math.random() * countries.length);
+    const flagData = countries[currentFlagIndex];
+    document.getElementById('flag').innerText = flagData.flag;
+    
+    const options = generateOptions(flagData.name);
+    for (let i = 0; i < options.length; i++) {
+        document.getElementById(`option${i + 1}`).innerText = options[i];
     }
+}
+
+function generateOptions(correctAnswer) {
+    let options = [correctAnswer];
+    while (options.length < 4) {
+        const randomIndex = Math.floor(Math.random() * countries.length);
+        const randomCountry = countries[randomIndex].name;
+        if (!options.includes(randomCountry)) {
+            options.push(randomCountry);
+        }
+    }
+    return shuffleArray(options);
 }
 
 function checkAnswer(optionId) {
     const selectedOption = document.getElementById(optionId).innerText;
-    const correctAnswer = flags[currentFlagIndex].correct;
+    const correctAnswer = countries[currentFlagIndex].name;
 
     if (selectedOption === correctAnswer) {
         document.getElementById('result').innerText = 'Correct!';
     } else {
-        document.getElementById('result').innerText = 'Wrong! The correct answer is ' + correctAnswer;
+        document.getElementById('result').innerText = `Wrong! The correct answer is ${correctAnswer}`;
     }
 
-    currentFlagIndex = (currentFlagIndex + 1) % flags.length;
     setTimeout(() => {
         document.getElementById('result').innerText = '';
         loadFlag();
@@ -60,4 +72,5 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
 }
