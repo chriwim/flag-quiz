@@ -1,13 +1,23 @@
 const flags = [
     {
-        src: 'path/to/flag1.png',
-        correct: 'Country1',
-        options: ['Country1', 'Country2', 'Country3', 'Country4']
+        symbol: '🇺🇸', // USA
+        correct: 'United States',
+        options: ['United States', 'Canada', 'United Kingdom', 'Australia']
     },
     {
-        src: 'path/to/flag2.png',
-        correct: 'Country2',
-        options: ['Country2', 'Country3', 'Country4', 'Country1']
+        symbol: '🇨🇦', // Canada
+        correct: 'Canada',
+        options: ['Canada', 'United States', 'United Kingdom', 'Australia']
+    },
+    {
+        symbol: '🇬🇧', // United Kingdom
+        correct: 'United Kingdom',
+        options: ['United Kingdom', 'United States', 'Canada', 'Australia']
+    },
+    {
+        symbol: '🇦🇺', // Australia
+        correct: 'Australia',
+        options: ['Australia', 'United States', 'Canada', 'United Kingdom']
     },
     // Add more flag objects here
 ];
@@ -20,7 +30,7 @@ window.onload = function() {
 
 function loadFlag() {
     const flagData = flags[currentFlagIndex];
-    document.getElementById('flag').src = flagData.src;
+    document.getElementById('flag').innerText = flagData.symbol;
     shuffleArray(flagData.options);
 
     for (let i = 0; i < flagData.options.length; i++) {
